@@ -1,8 +1,8 @@
-use bincode::Encode;
+use bincode::{Decode, Encode};
 use sha2::Digest;
 use crate::{hash_str, tools::{serialize}};
 
-#[derive(bincode::Encode,Debug)]
+#[derive(bincode::Encode,Debug,Decode)]
 pub struct BlockHeader {
     // 版本号
     pub version: String,
@@ -34,7 +34,7 @@ impl BlockHeader {
     }
 }
 
-#[derive(Encode,Debug,Clone)]
+#[derive(Encode,Debug,Clone,Decode)]
 pub struct Transaction {
     pub sender: String,
     pub receiver: String,
@@ -54,7 +54,7 @@ impl Transaction {
 }
 
 
-#[derive(Encode,Debug,Clone)]
+#[derive(Encode,Debug,Clone,Decode)]
 pub struct Transactions {
     pub transactions: Vec<Transaction>,
 }
@@ -105,7 +105,7 @@ impl Transactions {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug,Encode,Decode)]
 pub struct Block {
     pub header: BlockHeader,
     pub transactions: Transactions,
@@ -124,4 +124,11 @@ impl Block {
             hash,
         }
     }
+
+    pub fn calc_hash(&self) -> String {
+        let header = &self.header;
+        let transactions = &self.transactions;
+        hash_str!( header , transactions)
+    }
+
 }
