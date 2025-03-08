@@ -2,3 +2,6 @@
 
 /target
 blockchain.bin
+**/target
+.idea
+bitcode/target
