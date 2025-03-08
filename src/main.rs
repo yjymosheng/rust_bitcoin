@@ -1,15 +1,14 @@
 use std::io::{self, Write};
-use std::fs::File;
-use std::io::{BufReader, BufWriter};
 use bitcode::block::Transactions;
 use bitcode::chain::BlockChain;
 use rand::random;
 
 fn main() {
-    let mut difficulty = 4;  // 默认难度
+    let difficulty = 4;  // 默认难度
     let mut chain = BlockChain::new(difficulty);
 
     loop {
+        println!("");
         println!("请选择操作:");
         println!("1. 检查区块链一致性");
         println!("2. 进行挖矿");

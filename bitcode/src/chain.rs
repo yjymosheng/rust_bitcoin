@@ -1,10 +1,10 @@
-use std::fs::File;
-use std::io::{BufReader, Read, Write};
-use bincode::{Decode, Encode};
 use crate::block::{Block, Transactions};
-use crate::{hash_str, tools};
 use crate::tools::serialize;
+use crate::{hash_str, tools};
+use bincode::{Decode, Encode};
 use sha2::Digest;
+use std::fs::File;
+use std::io::{BufReader, Write};
 
 #[derive(Encode,Decode)]
 pub struct BlockChain {
